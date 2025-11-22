@@ -1,18 +1,18 @@
 # FastAPI y dependencias
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-python-dotenv==1.0.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
-python-multipart==0.0.6
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic
+pydantic-settings
+python-multipart
 
 # Base de datos
-mysql-connector-python==8.2.0
+mysql-connector-python
 
 # Firebase
-firebase-admin==6.4.0
+firebase-admin
 
 # Utilidades
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-email-validator==2.1.0
+python-jose[cryptography]
+passlib[bcrypt]
+email-validator
