@@ -5,6 +5,7 @@ import json
 
 # Intentar cargar desde variable de entorno (Railway) o archivo local (desarrollo)
 firebase_key = os.getenv('FIREBASE_KEY_JSON')
+
 if firebase_key:
     # Producción (Railway) - leer de variable de entorno
     try:
