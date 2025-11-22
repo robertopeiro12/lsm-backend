@@ -1,6 +1,7 @@
 # FastAPI y dependencias
 fastapi
 uvicorn[standard]
+gunicorn
 python-dotenv
 pydantic
 pydantic-settings

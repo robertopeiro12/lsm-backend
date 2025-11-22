@@ -19,8 +19,8 @@ from app.routes import (
 )
 from pathlib import Path
 
-# Inicializar Firebase
-from firebase_config import auth as firebase_auth
+# Inicializar Firebase antes de cualquier otra cosa
+import firebase_config  # Esto inicializa Firebase automáticamente
 
 app = FastAPI(
     title=settings.APP_NAME,

@@ -13,8 +13,12 @@ def get_db_connection():
             user=settings.DB_USER,
             password=settings.DB_PASS,
             database=settings.DB_NAME,
+            port=settings.DB_PORT,
             charset='utf8mb4',
-            collation='utf8mb4_unicode_ci'
+            collation='utf8mb4_unicode_ci',
+            autocommit=False,
+            pool_name='mypool',
+            pool_size=5
         )
         return connection
     except Error as e:
