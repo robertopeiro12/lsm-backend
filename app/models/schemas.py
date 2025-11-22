@@ -16,6 +16,11 @@ class Difficulty(str, Enum):
     medium = "medium"
     hard = "hard"
 
+class VideoDifficulty(str, Enum):
+    beginner = "beginner"
+    intermediate = "intermediate"
+    advanced = "advanced"
+
 class QuestionType(str, Enum):
     multiple_choice = "multiple_choice"
     video_match = "video_match"
@@ -388,6 +393,64 @@ class SearchRequest(BaseModel):
     query: str
     category_id: Optional[int] = None
     difficulty: Optional[Difficulty] = None
+
+# ============================================
+# VIDEO MODELS
+# ============================================
+
+class VideoBase(BaseModel):
+    category_id: int
+    title: str
+    description: Optional[str] = None
+    video_url: str
+    thumbnail_url: Optional[str] = None
+    duration: Optional[int] = None
+    difficulty: VideoDifficulty = VideoDifficulty.beginner
+    order_index: int = 0
+
+class VideoCreate(VideoBase):
+    pass
+
+class VideoUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    video_url: Optional[str] = None
+    thumbnail_url: Optional[str] = None
+    duration: Optional[int] = None
+    difficulty: Optional[VideoDifficulty] = None
+    order_index: Optional[int] = None
+    is_active: Optional[bool] = None
+
+class VideoResponse(VideoBase):
+    id: int
+    views_count: int
+    is_active: bool
+    created_at: datetime
+    updated_at: datetime
+    
+    class Config:
+        from_attributes = True
+
+class VideoProgressBase(BaseModel):
+    user_id: int
+    video_id: int
+    watched_seconds: int = 0
+    is_completed: bool = False
+
+class VideoProgressCreate(VideoProgressBase):
+    pass
+
+class VideoProgressUpdate(BaseModel):
+    watched_seconds: Optional[int] = None
+    is_completed: Optional[bool] = None
+
+class VideoProgressResponse(VideoProgressBase):
+    id: int
+    last_watched_at: datetime
+    created_at: datetime
+    
+    class Config:
+        from_attributes = True
 
 class SearchResponse(BaseModel):
     signs: list[SignResponse]

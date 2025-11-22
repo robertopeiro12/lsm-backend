@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from app.config import settings
 from app.routes import (
     auth, 
@@ -13,8 +14,10 @@ from app.routes import (
     challenges,
     achievements,
     statistics,
-    users
+    users,
+    videos
 )
+from pathlib import Path
 
 # Inicializar Firebase
 from firebase_config import auth as firebase_auth
@@ -34,11 +37,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Crear directorio uploads si no existe
+UPLOAD_DIR = Path("uploads")
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+# Montar directorio de archivos estáticos
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+
 # Incluir rutas
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(categories.router)
 app.include_router(signs.router)
+app.include_router(videos.router)
 app.include_router(favorites.router)
 app.include_router(progress.router)
 app.include_router(quizzes.router)
